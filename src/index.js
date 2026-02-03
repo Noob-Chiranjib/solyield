@@ -23,6 +23,11 @@ app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-app.listen(config.port, () => {
-  console.log(`SolYield running on http://localhost:${config.port}`);
-});
+// Start server in local dev, export for Vercel
+if (require.main === module) {
+  app.listen(config.port, () => {
+    console.log(`SolYield running on http://localhost:${config.port}`);
+  });
+}
+
+module.exports = app;
