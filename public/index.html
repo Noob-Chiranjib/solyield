@@ -4,25 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SolYield - Solana DeFi Yield Aggregator</title>
+  <meta name="description" content="Compare yields across 50+ Solana DeFi protocols. Analyze wallets, optimize strategies, find the best APY.">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="app">
     <header>
       <div class="logo">
-        <h1>SolYield</h1>
-        <span class="tagline">Solana DeFi Yield Aggregator</span>
+        <div class="logo-icon">SY</div>
+        <div>
+          <h1>SolYield</h1>
+          <span class="tagline">Solana DeFi Yield Aggregator</span>
+        </div>
       </div>
       <nav>
-        <button class="nav-btn active" data-tab="yields">Yields</button>
+        <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="nav-btn" data-tab="yields">Yields</button>
         <button class="nav-btn" data-tab="wallet">Wallet</button>
+        <button class="nav-btn" data-tab="compare">Compare</button>
         <button class="nav-btn" data-tab="protocols">Protocols</button>
       </nav>
     </header>
 
     <main>
+      <!-- Dashboard Tab -->
+      <section id="dashboard-tab" class="tab-content active">
+        <div id="dashboard-stats" class="stats-grid"></div>
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>Top Yields by TVL</h3>
+              <span class="card-subtitle">High TVL pools with best APY</span>
+            </div>
+            <div id="top-yields-chart"></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Liquid Staking Rates</h3>
+              <span class="card-subtitle">Current LST staking APY</span>
+            </div>
+            <div id="lst-rates-chart"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Trending Pools</h3>
+            <span class="card-subtitle">High APY pools with significant TVL</span>
+          </div>
+          <div id="trending-container"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Stablecoin Yields</h3>
+            <span class="card-subtitle">Low-risk stablecoin earning opportunities</span>
+          </div>
+          <div id="stable-yields-container"></div>
+        </div>
+      </section>
+
       <!-- Yields Tab -->
-      <section id="yields-tab" class="tab-content active">
+      <section id="yields-tab" class="tab-content">
         <div class="controls">
           <div class="search-box">
             <input type="text" id="search-input" placeholder="Search pools (e.g., SOL, USDC, raydium)...">
@@ -39,7 +80,7 @@
             </select>
           </div>
         </div>
-        <div id="yields-loading" class="loading">Loading yield data...</div>
+        <div id="yields-loading" class="loading"><div class="spinner"></div>Loading yield data...</div>
         <div id="yields-table-container"></div>
       </section>
 
@@ -49,20 +90,43 @@
           <input type="text" id="wallet-address" placeholder="Enter Solana wallet address...">
           <button id="analyze-btn">Analyze</button>
         </div>
-        <div id="wallet-loading" class="loading hidden">Analyzing wallet...</div>
+        <div class="example-wallets">
+          <span class="text-dim">Try: </span>
+          <button class="example-btn" data-addr="vines1vzrYbzLMRdu58ou5XTby4qAqVRLmqo36NKPTg">Solana Foundation</button>
+        </div>
+        <div id="wallet-loading" class="loading hidden"><div class="spinner"></div>Analyzing wallet...</div>
         <div id="wallet-results"></div>
+      </section>
+
+      <!-- Compare Tab -->
+      <section id="compare-tab" class="tab-content">
+        <div class="card">
+          <h3>Yield Comparison Tool</h3>
+          <p class="text-dim" style="margin: 8px 0 16px">Compare yields across protocols for a specific token</p>
+          <div class="compare-controls">
+            <select id="compare-token">
+              <option value="SOL">SOL Staking</option>
+              <option value="USDC">USDC Lending</option>
+              <option value="USDT">USDT Lending</option>
+              <option value="ETH">ETH Pools</option>
+            </select>
+            <button id="compare-btn">Compare</button>
+          </div>
+        </div>
+        <div id="compare-loading" class="loading hidden"><div class="spinner"></div>Comparing yields...</div>
+        <div id="compare-results"></div>
       </section>
 
       <!-- Protocols Tab -->
       <section id="protocols-tab" class="tab-content">
-        <div id="protocols-loading" class="loading">Loading protocols...</div>
+        <div id="protocols-loading" class="loading"><div class="spinner"></div>Loading protocols...</div>
         <div id="protocols-container"></div>
       </section>
     </main>
 
     <footer>
       <p>SolYield &mdash; Built by <strong>opus-defi-forge</strong> for the Colosseum Agent Hackathon</p>
-      <p>Data sourced from DeFi Llama, Jupiter, Marinade &amp; on-chain</p>
+      <p>Data sourced from DeFi Llama, Jupiter, Marinade &amp; on-chain | <a href="https://github.com/Noob-Chiranjib/solyield" target="_blank">GitHub</a></p>
     </footer>
   </div>
 
