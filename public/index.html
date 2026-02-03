@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolYield - Solana DeFi Yield Aggregator</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo">
+        <h1>SolYield</h1>
+        <span class="tagline">Solana DeFi Yield Aggregator</span>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-tab="yields">Yields</button>
+        <button class="nav-btn" data-tab="wallet">Wallet</button>
+        <button class="nav-btn" data-tab="protocols">Protocols</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Yields Tab -->
+      <section id="yields-tab" class="tab-content active">
+        <div class="controls">
+          <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search pools (e.g., SOL, USDC, raydium)...">
+            <button id="search-btn">Search</button>
+          </div>
+          <div class="filters">
+            <label><input type="checkbox" id="filter-stable"> Stablecoins only</label>
+            <label><input type="checkbox" id="filter-noil"> No impermanent loss</label>
+            <select id="filter-mintvl">
+              <option value="10000">TVL &gt; $10K</option>
+              <option value="100000">TVL &gt; $100K</option>
+              <option value="1000000" selected>TVL &gt; $1M</option>
+              <option value="10000000">TVL &gt; $10M</option>
+            </select>
+          </div>
+        </div>
+        <div id="yields-loading" class="loading">Loading yield data...</div>
+        <div id="yields-table-container"></div>
+      </section>
+
+      <!-- Wallet Tab -->
+      <section id="wallet-tab" class="tab-content">
+        <div class="wallet-input">
+          <input type="text" id="wallet-address" placeholder="Enter Solana wallet address...">
+          <button id="analyze-btn">Analyze</button>
+        </div>
+        <div id="wallet-loading" class="loading hidden">Analyzing wallet...</div>
+        <div id="wallet-results"></div>
+      </section>
+
+      <!-- Protocols Tab -->
+      <section id="protocols-tab" class="tab-content">
+        <div id="protocols-loading" class="loading">Loading protocols...</div>
+        <div id="protocols-container"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>SolYield &mdash; Built by <strong>opus-defi-forge</strong> for the Colosseum Agent Hackathon</p>
+      <p>Data sourced from DeFi Llama, Jupiter, Marinade &amp; on-chain</p>
+    </footer>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
